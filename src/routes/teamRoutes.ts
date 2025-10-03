@@ -1,10 +1,8 @@
 import { Elysia } from "elysia";
-import { authPlugin } from "../plugins/auth";
 import { createTeam, deleteTeam, listTeams, updateTeam } from "../controllers/teamController";
 import { CreateTeamSchema, UpdateTeamSchema } from "../lib/validation";
 
 export const teamRoutes = new Elysia()
-  .use(authPlugin)
   .get("/teams", () => listTeams())
   .post("/teams", async ({ request, set }) => {
     const body = await request.json();

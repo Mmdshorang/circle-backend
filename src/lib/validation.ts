@@ -31,8 +31,8 @@ export const CreateIssueSchema = z.object({
   statusId: z.string().min(1),
   projectId: z.string().optional(),
   cycleId: z.string().optional(),
-  assigneeId: z.string().nullable().optional(),
-  description: z.string().nullable().optional(),
+  assigneeId: z.string().optional(),
+  description: z.string().optional(),
   priority: z.enum(['LOW', 'MEDIUM', 'HIGH', 'CRITICAL']).optional(),
 });
 

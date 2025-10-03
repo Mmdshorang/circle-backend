@@ -14,6 +14,16 @@ export async function listIssues(params: { projectId?: string; cycleId?: string 
   return { ok: true, data: issues };
 }
 
+export async function getIssue(params: { id: string }) {
+  const { id } = params;
+  const issue = await prisma.issue.findUnique({
+    where: { id },
+    include: { status: true, assignee: true, labels: true },
+  });
+  if (!issue) throw new HttpError(404, "Issue not found");
+  return { ok: true, data: issue };
+}
+
 export async function createIssue(data: {
   title: string;
   statusId: string;

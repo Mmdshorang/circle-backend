@@ -53,7 +53,7 @@ async function main() {
   });
   await prisma.health.upsert({
     where: { id: "HEALTH1" },
-    update: {}, 
+    update: {},
     create: {
       id: "HEALTH1",
       name: "Healthy",
@@ -61,7 +61,6 @@ async function main() {
       description: "Everything is fine",
     },
   });
-
 
   const project = await prisma.project.create({
     data: {
@@ -72,13 +71,12 @@ async function main() {
       percentComplete: 0,
       startDate: new Date(),
       priority: "MEDIUM",
-      healthId: "HEALTH1", 
+      healthId: "HEALTH1",
       teams: {
         connect: [{ id: "CORE" }, { id: "PERF" }],
       },
     },
   });
-
 
   // 🟢 Issues نمونه
   await prisma.issue.createMany({
@@ -112,6 +110,52 @@ async function main() {
   });
 
   console.log("✅ Test data created!");
+  // 🟢 Labels نمونه
+  await prisma.label.createMany({
+    data: [
+      { id: "LBL1", name: "Bug", color: "red" },
+      { id: "LBL2", name: "Feature", color: "blue" },
+      { id: "LBL3", name: "Improvement", color: "green" },
+    ],
+    skipDuplicates: true,
+  });
+
+  // 🟢 Cycle نمونه
+  await prisma.cycle.create({
+    data: {
+      id: "CYC1",
+      number: 1,
+      name: "Sprint 1",
+      teamId: "CORE",
+      startDate: new Date("2023-01-01"),
+      endDate: new Date("2023-01-15"),
+      progress: 0.5,
+    },
+  });
+
+  // 🟢 InboxItem نمونه
+  await prisma.inboxItem.create({
+    data: {
+      id: "INB1",
+      identifier: "INB-0001",
+      title: "New comment on issue",
+      description: "A new comment was added to your issue.",
+      statusId: "TODO",
+      assigneeId: "ln",
+      userId: "ln",
+      priority: "MEDIUM",
+      createdAt: new Date(),
+      cycleId: "CYC1",
+      projectId: "PRJ1",
+      labels: { connect: [{ id: "LBL1" }] },
+      content: "Check the latest comment.",
+      type: "COMMENT",
+      dueDate: new Date("2023-01-10"),
+      timestamp: new Date(),
+      read: false,
+      subissues: [],
+    },
+  });
 }
 
 main()

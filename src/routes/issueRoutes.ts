@@ -1,6 +1,6 @@
 import { Elysia } from "elysia";
 import { authPlugin } from "../plugins/auth";
-import { createIssue, deleteIssue, listIssues, updateIssue } from "../controllers/issueController";
+import { createIssue, deleteIssue, getIssue, listIssues, updateIssue } from "../controllers/issueController";
 import { CreateIssueSchema, UpdateIssueSchema, ListIssuesQuerySchema } from "../lib/validation";
 
 export const issueRoutes = new Elysia()
@@ -13,6 +13,7 @@ export const issueRoutes = new Elysia()
     }
     return listIssues(parsed.data);
   })
+  .get("/issues/:id", ({ params }) => getIssue({ id: (params as any).id }))
   .post("/issues", async ({ request, set }) => {
     const body = await request.json();
     const parsed = CreateIssueSchema.safeParse(body);
