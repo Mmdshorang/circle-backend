@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@elysiajs/cors": "^1.4.0",
     "@elysiajs/node": "^1.4.1",
     "@prisma/client": "^6.16.2",
     "bcrypt": "^6.0.0",

@@ -1,4 +1,5 @@
 import { Elysia } from 'elysia';
 import { getUsers } from '../controllers/userController';
+import { authPlugin } from '../plugins/auth';
 
-export default new Elysia().get('/users', getUsers);
+export const userRoutes = new Elysia().use(authPlugin).get('/users', async () => getUsers());

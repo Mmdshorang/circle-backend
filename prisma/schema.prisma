@@ -64,6 +64,7 @@ model User {
   // ✅ اینا رو اضافه کن
   assignedInboxItems InboxItem[] @relation("InboxItemAssignee")
   createdInboxItems  InboxItem[] @relation("InboxItemUser")
+
 }
 
 // Team table
@@ -76,6 +77,8 @@ model Team {
   members   Member[]
   projects  Project[] @relation("ProjectTeams")
   cycles    Cycle[]
+
+  @@unique([name])
 }
 
 
@@ -106,6 +109,8 @@ model Project {
   teams           Team[]   @relation("ProjectTeams")
   issues          Issue[]
    inboxItems      InboxItem[] 
+
+  @@unique([name])
 }
 
 // Label
@@ -158,6 +163,8 @@ model Cycle {
   endDate   DateTime
   progress  Float
   issues    Issue[]
+
+  @@index([teamId])
 }
 
 // InboxItem / Notification
@@ -203,3 +210,5 @@ model InboxItem {
   timestamp   DateTime @default(now())
   read        Boolean  @default(false)
 }
+
+// (Workspace removed)
