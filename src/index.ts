@@ -10,7 +10,6 @@ import { teamRoutes } from "./routes/teamRoutes";
 import { issueRoutes } from "./routes/issueRoutes";
 import { inboxRoutes } from "./routes/inboxRoutes";
 import { userRoutes } from "./routes/userRoutes";
-import { workspaceRoutes } from "./routes/workspaceRoutes";
 
 const app = new Elysia();
 
@@ -22,7 +21,6 @@ app.use(teamRoutes);
 app.use(issueRoutes);
 app.use(inboxRoutes);
 app.use(userRoutes);
-app.use(workspaceRoutes);
 
 app.use(authPlugin)
    .get("/me", ({ store }) => {

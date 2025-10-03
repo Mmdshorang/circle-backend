@@ -80,6 +80,37 @@ async function main() {
   });
 
 
+  // 🟢 Issues نمونه
+  await prisma.issue.createMany({
+    data: [
+      {
+        id: "ISS1",
+        identifier: "PRJ-0001",
+        title: "Setup CI",
+        description: "Configure CI pipeline",
+        statusId: "INPROGRESS",
+        assigneeId: "ln",
+        priority: "HIGH",
+        createdAt: new Date(),
+        projectId: project.id,
+        rank: `${Date.now()}-1`,
+      },
+      {
+        id: "ISS2",
+        identifier: "PRJ-0002",
+        title: "Implement auth",
+        description: "Add login with JWT",
+        statusId: "TODO",
+        assigneeId: null,
+        priority: "MEDIUM",
+        createdAt: new Date(),
+        projectId: project.id,
+        rank: `${Date.now()}-2`,
+      },
+    ],
+    skipDuplicates: true,
+  });
+
   console.log("✅ Test data created!");
 }
 
