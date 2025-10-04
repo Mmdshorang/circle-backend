@@ -211,4 +211,4 @@ model InboxItem {
   read        Boolean  @default(false)
 }
 
-// (Workspace removed)
+
